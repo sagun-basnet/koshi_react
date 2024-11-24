@@ -1,33 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+import MyComponent from './components/MyComponent';
+import Button from './components/Button';
+// import Home from './components/Home';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-
-  const [count, setCount] = useState(0);
-
-  const add = () => {
-    setCount(count + 1)
-  }
-
-  const sub = () => {
-    count === 0 ? setCount(count) : setCount(count - 1);
-
-  }
-
   return (
     <>
-      <div className='flex gap-4 justify-center items-center h-[100vh]'>
-        <button onClick={add} className='p-2 px-4 bg-blue-400 rounded-md hover:bg-blue-600 text-white'>Add</button>
-        <span className='text-[2rem]'>{count}</span>
+      <nav>
+        <ul className='flex gap-4'>
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/about'>About</Link></li>
+          <li><Link to='/contact'>Contact</Link></li>
 
-        {
-          count === 0 ? <></> :
-            <button onClick={sub} className='p-2 px-4 bg-red-400 rounded-md hover:bg-red-600 text-white'>Sub</button>
-        }
-      </div >
-
-
-    .
+        </ul>
+      </nav>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/about' element={<About />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
 
   )
